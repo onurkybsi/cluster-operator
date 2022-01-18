@@ -5,11 +5,11 @@ import org.kyb.clusteroperator.clusterClients.models.Deployment;
 import java.util.List;
 
 /**
- * Contains various services to get information about a cluster
+ * Contains various services to provide information about the cluster
  */
 public interface InformativeService {
     /**
-     * Receives all current deployments metadata
+     * Receives metadata of all current deployments in the cluster
      *
      * @return
      */

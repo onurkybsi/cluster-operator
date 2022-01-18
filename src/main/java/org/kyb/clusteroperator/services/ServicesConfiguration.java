@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configures Service layer dependencies
+ * Configures Services layer dependencies
  */
 @Configuration
 public class ServicesConfiguration {

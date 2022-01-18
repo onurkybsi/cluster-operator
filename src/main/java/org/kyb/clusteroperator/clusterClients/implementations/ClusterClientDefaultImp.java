@@ -1,4 +1,4 @@
-package org.kyb.clusteroperator.clusterClients;
+package org.kyb.clusteroperator.clusterClients.implementations;
 
 import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
@@ -8,6 +8,7 @@ import io.kubernetes.client.openapi.models.V1Pod;
 import io.kubernetes.client.openapi.models.V1PodList;
 import io.kubernetes.client.util.ClientBuilder;
 import io.kubernetes.client.util.KubeConfig;
+import org.kyb.clusteroperator.clusterClients.ClusterClient;
 import org.kyb.clusteroperator.clusterClients.models.ClusterConfig;
 import org.kyb.clusteroperator.clusterClients.models.Deployment;
 import org.kyb.clusteroperator.clusterClients.models.Pod;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClusterClientDefaultImp implements ClusterClient {
-    private CoreV1Api api;
+    private CoreV1Api _coreV1Api;
 
     public ClusterClientDefaultImp(ClusterConfig config) {
         try {
@@ -28,26 +29,24 @@ public class ClusterClientDefaultImp implements ClusterClient {
                             .kubeconfig(KubeConfig
                                     .loadKubeConfig(new FileReader(config.getKubeConfigFilePath()))).build();
             Configuration.setDefaultApiClient(client);
+            _coreV1Api = new CoreV1Api();
         } catch (IOException ex) {
             // TO-DO: Log it!
             throw new ExternalOperationException("Error occurred when ApiClient building!");
         }
-        api = new CoreV1Api();
     }
 
     @Override
     public List<Pod> getAllPods() {
         try {
-            V1PodList podList = api.listPodForAllNamespaces(null, null, null, null,
+            V1PodList podList = _coreV1Api.listPodForAllNamespaces(null, null, null, null,
                     null, null, null, null, null, null);
-            if (podList == null) {
-                // TO-DO: Log!
+            if (podList == null)
                 throw new ExternalOperationException("V1PodList was received as null!");
-            }
             return convertV1PodListToListOfPod(podList);
         } catch (ApiException ex) {
             // TO-DO: Log!
-            throw new ExternalOperationException("Error occurred when pod list receiving !" + ex);
+            throw new ExternalOperationException("Error occurred when pod list receiving!");
         }
     }
 

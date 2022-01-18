@@ -1,7 +1,7 @@
 package org.kyb.clusteroperator.common.exceptions;
 
 /**
- * Represents exceptions occurred when external operation is handling
+ * Represents exceptions that occur while handling an external operation
  */
 public class ExternalOperationException extends RuntimeException {
     public ExternalOperationException(String errorMessage) {

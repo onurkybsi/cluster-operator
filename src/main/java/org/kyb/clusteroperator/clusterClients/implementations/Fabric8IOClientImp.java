@@ -1,8 +1,9 @@
-package org.kyb.clusteroperator.clusterClients;
+package org.kyb.clusteroperator.clusterClients.implementations;
 
 import io.fabric8.kubernetes.api.model.apps.DeploymentList;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import org.kyb.clusteroperator.clusterClients.ClusterClient;
 import org.kyb.clusteroperator.clusterClients.models.Deployment;
 import org.kyb.clusteroperator.clusterClients.models.Pod;
 import org.kyb.clusteroperator.common.exceptions.ExternalOperationException;
@@ -10,11 +11,11 @@ import org.kyb.clusteroperator.common.exceptions.ExternalOperationException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fabric8IOClient implements ClusterClient {
-    private KubernetesClient _client;
+public class Fabric8IOClientImp implements ClusterClient {
+    private KubernetesClient _kubernetesClient;
 
-    public Fabric8IOClient() {
-        _client = new DefaultKubernetesClient();
+    public Fabric8IOClientImp() {
+        _kubernetesClient = new DefaultKubernetesClient();
     }
 
     @Override
@@ -25,13 +26,13 @@ public class Fabric8IOClient implements ClusterClient {
     @Override
     public List<Deployment> getAllDeployments() {
         try {
-            DeploymentList list = _client.apps().deployments().list();
+            DeploymentList list = _kubernetesClient.apps().deployments().list();
             if (list == null)
-                throw new ExternalOperationException("DeploymentList were received as null!");
+                throw new ExternalOperationException("DeploymentList was received as null!");
             return convertFabric8IODeploymentListToListOfDeployment(list);
         } catch (Exception ex) {
             // TO-DO: Log it!
-            throw new ExternalOperationException("Exception occurred when deployments receiving!");
+            throw new ExternalOperationException("Exception occurred when deployment list receiving!");
         }
     }
 

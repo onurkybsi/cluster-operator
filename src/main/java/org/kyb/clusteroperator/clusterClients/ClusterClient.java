@@ -10,14 +10,14 @@ import java.util.List;
  */
 public interface ClusterClient {
     /**
-     * Receives all pods which defined on the cluster
+     * Receives all the pods which were defined on the cluster
      *
      * @return
      */
     List<Pod> getAllPods();
 
     /**
-     * Receives all deployments which defined on the cluster
+     * Receives all the deployments which were defined on the cluster
      *
      * @return
      */

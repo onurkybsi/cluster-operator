@@ -1,7 +1,7 @@
 package org.kyb.clusteroperator.clusterClients.models;
 
 /**
- * Represents configuration values of the cluster connection
+ * Represents a model which contains configuration values of the cluster connection
  */
 public class ClusterConfig {
     private String _kubeConfigFilePath;
