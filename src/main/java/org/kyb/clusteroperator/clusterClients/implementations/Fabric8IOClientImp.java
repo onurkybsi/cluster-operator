@@ -15,7 +15,12 @@ public class Fabric8IOClientImp implements ClusterClient {
     private KubernetesClient _kubernetesClient;
 
     public Fabric8IOClientImp() {
-        _kubernetesClient = new DefaultKubernetesClient();
+        try {
+            _kubernetesClient = new DefaultKubernetesClient();
+        } catch (Exception ex) {
+            // TO-DO: Log it!
+            throw new ExternalOperationException("Error occurred when DefaultKubernetesClient building!");
+        }
     }
 
     @Override
@@ -41,7 +46,8 @@ public class Fabric8IOClientImp implements ClusterClient {
 
         var deploymentList = list.getItems();
         for (io.fabric8.kubernetes.api.model.apps.Deployment fabric8IODeployment : deploymentList)
-            result.add(new Deployment(fabric8IODeployment.getMetadata().getName()));
+            result.add(new Deployment(fabric8IODeployment.getMetadata().getName(),
+                    fabric8IODeployment.getMetadata().getNamespace()));
 
         return result;
     }

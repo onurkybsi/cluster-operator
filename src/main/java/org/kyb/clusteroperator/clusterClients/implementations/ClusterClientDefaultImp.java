@@ -30,7 +30,7 @@ public class ClusterClientDefaultImp implements ClusterClient {
                                     .loadKubeConfig(new FileReader(config.getKubeConfigFilePath()))).build();
             Configuration.setDefaultApiClient(client);
             _coreV1Api = new CoreV1Api();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             // TO-DO: Log it!
             throw new ExternalOperationException("Error occurred when ApiClient building!");
         }
