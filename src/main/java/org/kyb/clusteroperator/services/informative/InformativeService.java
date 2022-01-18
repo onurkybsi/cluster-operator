@@ -1,6 +1,6 @@
 package org.kyb.clusteroperator.services.informative;
 
-import org.kyb.clusteroperator.services.informative.models.Deployment;
+import org.kyb.clusteroperator.clusterClients.models.Deployment;
 
 import java.util.List;
 

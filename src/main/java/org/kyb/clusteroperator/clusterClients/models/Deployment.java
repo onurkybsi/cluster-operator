@@ -1,4 +1,4 @@
-package org.kyb.clusteroperator.services.informative.models;
+package org.kyb.clusteroperator.clusterClients.models;
 
 public class Deployment {
     private String _name;

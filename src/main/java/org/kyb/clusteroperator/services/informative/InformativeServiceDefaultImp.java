@@ -1,6 +1,7 @@
 package org.kyb.clusteroperator.services.informative;
 
-import org.kyb.clusteroperator.services.informative.models.Deployment;
+import org.kyb.clusteroperator.clusterClients.ClusterClient;
+import org.kyb.clusteroperator.clusterClients.models.Deployment;
 
 import java.util.List;
 
@@ -8,10 +9,14 @@ import java.util.List;
  * Default implementation of InformationService
  */
 public class InformativeServiceDefaultImp implements InformativeService {
-    // TO-DO: You should get the cluster information in construction!
+    private ClusterClient _clusterClient;
+
+    public InformativeServiceDefaultImp(ClusterClient clusterClient) {
+        _clusterClient = clusterClient;
+    }
 
     @Override
     public List<Deployment> getAllCurrentDeployments() {
-        return null;
+        return _clusterClient.getAllDeployments();
     }
 }

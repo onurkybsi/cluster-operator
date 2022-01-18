@@ -1,7 +1,7 @@
 package org.kyb.clusteroperator.api.controllers;
 
+import org.kyb.clusteroperator.clusterClients.models.Deployment;
 import org.kyb.clusteroperator.services.informative.InformativeService;
-import org.kyb.clusteroperator.services.informative.models.Deployment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +25,14 @@ public class InformativeController {
      *
      * @return
      */
-    @GetMapping("/getAllCurrentDeployments")
+    @GetMapping("getAllCurrentDeployments")
     public ResponseEntity<?> getAllCurrentDeployments() {
         try {
             List<Deployment> serviceResult = _informativeService.getAllCurrentDeployments();
             return ResponseEntity.ok(serviceResult);
         } catch (Exception ex) {
             // TO-DO: Log the exception!
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(ex, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

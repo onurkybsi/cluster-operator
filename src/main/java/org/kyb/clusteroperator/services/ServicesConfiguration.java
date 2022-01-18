@@ -1,7 +1,9 @@
 package org.kyb.clusteroperator.services;
 
+import org.kyb.clusteroperator.clusterClients.ClusterClient;
 import org.kyb.clusteroperator.services.informative.InformativeService;
 import org.kyb.clusteroperator.services.informative.InformativeServiceDefaultImp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,10 +11,9 @@ import org.springframework.context.annotation.Configuration;
  * Configures Service layer dependencies
  */
 @Configuration
-public class ServiceConfiguration {
+public class ServicesConfiguration {
     @Bean
-    public InformativeService informativeService() {
-        // TO-DO: We should pass the cluster metadata
-        return new InformativeServiceDefaultImp();
+    public InformativeService informativeService(@Autowired ClusterClient clusterClient) {
+        return new InformativeServiceDefaultImp(clusterClient);
     }
 }
