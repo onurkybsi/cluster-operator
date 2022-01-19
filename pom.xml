@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.kyb</groupId>
     <artifactId>cluster-operator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>cluster-operator</name>
     <description>A RESTful API that operates a Kubernetes cluster by given cluster metadata</description>
     <properties>
