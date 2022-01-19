@@ -6,7 +6,10 @@ import org.kyb.clusteroperator.clusterClients.models.ClusterConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -16,13 +19,14 @@ import java.util.Objects;
 public class ClusterClientsConfiguration {
     @Value("${CLUSTER_CLIENT_TYPE:fabric8IO}")
     private String clusterClientType;
-    @Value("${KUBECONFIG:~/.kube/config}")
-    private String kubeConfigFilePath;
+    @Value("${KUBECONFIG_FILE_PATH}")
+    private String kubeconfigFilePath;
 
     @Bean
-    public ClusterClient clusterClient() {
-        if (Objects.equals(clusterClientType, "fabric8IO"))
-            return new Fabric8IOClientImp();
-        return new ClusterClientDefaultImp(new ClusterConfig(kubeConfigFilePath));
+    public ClusterClient clusterClient() throws IOException {
+        if (Objects.equals(clusterClientType, "fabric8IO")) {
+            return new Fabric8IOClientImp(new ClusterConfig(kubeconfigFilePath));
+        }
+        return new ClusterClientDefaultImp(new ClusterConfig(kubeconfigFilePath));
     }
 }
