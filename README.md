@@ -18,7 +18,7 @@ maven package
 3. Finally, you can run _cluster-operator_ 
 
 ```bash
-java -jar ./target/cluster-operator-1.0.0.jar
+java -jar ./target/cluster-operator-1.0.0-SNAPSHOT.jar
 ```
 
 ## Usage
