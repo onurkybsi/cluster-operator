@@ -32,7 +32,7 @@ public class InformativeController {
             return ResponseEntity.ok(serviceResult);
         } catch (Exception ex) {
             // TO-DO: Log the exception!
-            return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
