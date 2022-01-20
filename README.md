@@ -18,7 +18,7 @@ mvn package
 3. Finally, you can run _cluster-operator_ via executing command below in the `/target` folder
 
 ```bash
-java -jar ./target/cluster-operator-1.0.0-SNAPSHOT.jar
+java -jar cluster-operator-1.0.0-SNAPSHOT.jar
 ```
 
 ## Usage
