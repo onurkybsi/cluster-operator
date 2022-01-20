@@ -15,7 +15,7 @@ mvn package
 ```
 
 2. _cluster-operator_ needs _kubeconfig_ file to communicate with the API server of a Kubernetes cluster. You should assign the value of `KUBECONFIG_FILE_PATH` in `application.properties` which created in the `/target` folder as the path of that file.
-3. Finally, you can run _cluster-operator_ 
+3. Finally, you can run _cluster-operator_ via executing command below in the `/target` folder
 
 ```bash
 java -jar ./target/cluster-operator-1.0.0-SNAPSHOT.jar
