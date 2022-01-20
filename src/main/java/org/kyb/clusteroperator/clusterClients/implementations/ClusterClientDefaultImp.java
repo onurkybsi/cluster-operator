@@ -1,39 +1,25 @@
 package org.kyb.clusteroperator.clusterClients.implementations;
 
-import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
-import io.kubernetes.client.openapi.Configuration;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.V1Pod;
 import io.kubernetes.client.openapi.models.V1PodList;
-import io.kubernetes.client.util.ClientBuilder;
-import io.kubernetes.client.util.KubeConfig;
 import org.kyb.clusteroperator.clusterClients.ClusterClient;
-import org.kyb.clusteroperator.clusterClients.models.ClusterConfig;
 import org.kyb.clusteroperator.clusterClients.models.Deployment;
 import org.kyb.clusteroperator.clusterClients.models.Pod;
 import org.kyb.clusteroperator.common.exceptions.ExternalOperationException;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Default implementation of ClusterClient
+ */
 public class ClusterClientDefaultImp implements ClusterClient {
     private CoreV1Api _coreV1Api;
 
-    public ClusterClientDefaultImp(ClusterConfig config) {
-        try {
-            ApiClient client =
-                    ClientBuilder
-                            .kubeconfig(KubeConfig
-                                    .loadKubeConfig(new FileReader(config.getKubeConfigFilePath()))).build();
-            Configuration.setDefaultApiClient(client);
-            _coreV1Api = new CoreV1Api();
-        } catch (Exception ex) {
-            // TO-DO: Log it!
-            throw new ExternalOperationException("Error occurred when ApiClient building!");
-        }
+    public ClusterClientDefaultImp(CoreV1Api coreV1Api) {
+        _coreV1Api = coreV1Api;
     }
 
     @Override
