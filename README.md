@@ -11,7 +11,7 @@ A RESTful API that operates a Kubernetes cluster by given cluster metadata with 
 1. Use _Maven_ to build _cluster-operator_
 
 ```bash
-maven package
+mvn package
 ```
 
 2. _cluster-operator_ needs _kubeconfig_ file to communicate with the API server of a Kubernetes cluster. You should assign the value of `KUBECONFIG_FILE_PATH` in `application.properties` which created in the `/target` folder as the path of that file.
